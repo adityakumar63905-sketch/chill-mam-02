@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be Like Me — The Chill Guy Edition</title>
+
+<style>
+:root{
+  --bg:#ffffff;
+  --ink:#0f172a;
+  --muted:#64748b;
+  --accent:#ec4899;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial;
+  background:var(--bg);
+  color:var(--ink);
+  overflow:hidden;
+}
+
+/* Scene container */
+.story{
+  width:100vw;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+/* Scene */
+.scene{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
+  padding:24px;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(20px);
+  transition:.6s;
+}
+.scene.active{
+  opacity:1;
+  pointer-events:auto;
+  transform:none;
+}
+
+/* Media */
+img, gif{
+  max-width:320px;
+  width:100%;
+  border-radius:22px;
+  box-shadow:0 24px 60px rgba(0,0,0,.18);
+}
+
+/* Text */
+.title{
+  font-size:22px;
+  font-weight:700;
+  text-align:center;
+}
+.subtitle{
+  font-size:18px;
+  font-weight:600;
+  color:var(--muted);
+  text-align:center;
+}
+
+/* Hearts */
+.hearts{
+  display:flex;
+  gap:12px;
+}
+.heart{
+  width:16px;
+  height:16px;
+  background:var(--accent);
+  transform:rotate(-45deg);
+  position:relative;
+  animation:beat 1.1s infinite;
+}
+.heart::before,.heart::after{
+  content:"";
+  position:absolute;
+  width:16px;
+  height:16px;
+  background:var(--accent);
+  border-radius:50%;
+}
+.heart::before{top:-8px;left:0}
+.heart::after{left:8px;top:0}
+@keyframes beat{
+  50%{transform:rotate(-45deg) scale(1.25)}
+}
+
+/* Buttons */
+.btn{
+  margin-top:10px;
+  padding:12px 22px;
+  border-radius:999px;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* Footer hint */
+.hint{
+  position:absolute;
+  bottom:20px;
+  font-size:14px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgm" loop>
+  <source src="just chill likeandsubscribe share funny dinosaur.mp3" type="audio/mpeg">
+</audio>
+
+<div class="story">
+
+  <!-- SCENE 1 -->
+  <section class="scene active">
+    <img src="image-center.jpg">
+    <div class="title">Mai To Chill Guy hu Ekdam</div>
+    <div class="hearts">
+      <span class="heart"></span>
+      <span class="heart"></span>
+    </div>
+    <div class="subtitle">M apni favorite hu</div>
+    <button class="btn" onclick="next()">Continue →</button>
+    <div class="hint">Tap to continue</div>
+  </section>
+
+  <!-- SCENE 2 -->
+  <section class="scene">
+    <img src="gif1.gif">
+    <div class="title">
+      Mai To Sbkoo Ignore Krr Deti Hu..
+    </div>
+    <div class="subtitle">
+      Issliye to Chill Hu Laadlee
+    </div>
+    <button class="btn" onclick="next()">Next →</button>
+  </section>
+
+  <!-- SCENE 3 -->
+  <section class="scene">
+    <img src="gif2.gif">
+    <div class="title">
+      Mujse To Uljhana Bhee Mat Wrnaa
+    </div>
+    <button class="btn" onclick="next()">Still going →</button>
+  </section>
+
+  <!-- SCENE 4 -->
+  <section class="scene">
+    <img src="gif3.gif">
+    <div class="title">
+      To Tuu aaj Mere Haathoon Khtaam Hai Beta
+    </div>
+    <div class="subtitle" style="margin-top:20px;">
+      This page was made just for you 💙
+    </div>
+    <div class="subtitle" style="margin-top:6px;">
+      Confidence looks good on you.
+    </div>
+  </section>
+
+</div>
+
+<script>
+let current = 0;
+const scenes = document.querySelectorAll('.scene');
+const bgm = document.getElementById('bgm');
+let musicStarted = false;
+
+function next(){
+  if(!musicStarted){
+    bgm.play();
+    musicStarted = true;
+  }
+  scenes[current].classList.remove('active');
+  current++;
+  if(current < scenes.length){
+    scenes[current].classList.add('active');
+  }
+}
+</script>
+
+</body>
+</html>
